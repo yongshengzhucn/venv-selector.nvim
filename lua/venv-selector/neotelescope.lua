@@ -175,7 +175,7 @@ function M.open()
       return true
     end,
   }
-  pickers.new({}, opts):find()
+  pickers.new(require('telescope.themes').get_dropdown {}, opts):find()
 
   if dont_refresh_telescope and has_telescope_results then
     dbg 'Using cached results.'

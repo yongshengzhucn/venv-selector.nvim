@@ -1,7 +1,7 @@
 local venv = require 'venv-selector.venv'
 local config = require 'venv-selector.config'
 local dbg = require('venv-selector.utils').dbg
-local mytelescope = require 'venv-selector.mytelescope'
+local neotelescope = require 'venv-selector.neotelescope'
 local hooks = require 'venv-selector.hooks'
 local utils = require 'venv-selector.utils'
 
@@ -48,7 +48,7 @@ end
 
 -- The main function runs when user executes VenvSelect command
 function M.open()
-  mytelescope.open()
+  neotelescope.open()
 end
 
 function M.deactivate_venv()

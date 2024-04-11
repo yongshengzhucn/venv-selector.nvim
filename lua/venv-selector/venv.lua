@@ -1,7 +1,7 @@
 local system = require 'venv-selector.system'
 local utils = require 'venv-selector.utils'
 local dbg = require('venv-selector.utils').dbg
-local mytelescope = require 'venv-selector.mytelescope'
+local neotelescope = require 'venv-selector.neotelescope'
 local config = require 'venv-selector.config'
 
 local M = {}
@@ -55,7 +55,7 @@ function M.find_other_venvs(event)
     M.find_venv_manager_venvs()
   end
 
-  mytelescope.show_results()
+  neotelescope.show_results()
 end
 
 -- Manages the paths to python since they are different on Linux, Mac and Windows
@@ -195,7 +195,7 @@ function M.find_parent_venvs(parent_dir)
       M.fd_handle:close()
     end)
   )
-  vim.loop.read_start(stdout, mytelescope.on_read)
+  vim.loop.read_start(stdout, neotelescope.on_read)
 end
 
 -- Gets called when user hits enter in the Telescope results dialog
@@ -242,7 +242,7 @@ function M.find_workspace_venvs()
       .. search_path_string
     dbg('Running search for workspace venvs with: ' .. cmd)
     local openPop = assert(io.popen(cmd, 'r'))
-    mytelescope.add_lines(openPop:lines(), 'Workspace')
+    neotelescope.add_lines(openPop:lines(), 'Workspace')
     openPop:close()
   else
     dbg 'Found no workspaces to search for venvs.'
@@ -268,13 +268,13 @@ function M.find_venv_manager_venvs()
       .. " --exclude '3.*.*'"
     dbg('Running search for venv manager venvs with: ' .. cmd)
     local openPop = assert(io.popen(cmd, 'r'))
-    mytelescope.add_lines(openPop:lines(), 'VenvManager')
+    neotelescope.add_lines(openPop:lines(), 'VenvManager')
     openPop:close()
 
     -- If $CONDA_PREFIX is defined and exists, add the path as an existing venv
     if vim.fn.isdirectory(config.settings.anaconda_base_path) ~= 0 then
       table.insert(
-        mytelescope.results,
+        neotelescope.results,
         { icon = '', path = utils.remove_last_slash(config.settings.anaconda_base_path .. '/') }
       )
     end

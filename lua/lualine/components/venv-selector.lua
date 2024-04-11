@@ -1,7 +1,7 @@
 local M = require('lualine.component'):extend()
 
 local default_opts = {
-  icon = '',
+  icon = '',
   color = { fg = '#CDD6F4' },
   on_click = function()
     require('venv-selector').open()
