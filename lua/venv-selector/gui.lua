@@ -239,7 +239,7 @@ function M.open(in_progress)
       return true
     end,
   }
-  pickers.new(themes.get_dropdown { layout_config = { width = 120 } }, opts):find()
+  pickers.new(themes.get_ivy {}, opts):find()
 end
 
 return M
